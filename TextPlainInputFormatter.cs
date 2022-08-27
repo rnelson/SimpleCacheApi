@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc.Formatters;
+﻿// https://peterdaugaardrasmussen.com/2020/02/29/asp-net-core-how-to-make-a-controller-endpoint-that-accepts-text-plain/
+
+using Microsoft.AspNetCore.Mvc.Formatters;
 
 namespace SimpleCacheApi;
 

@@ -1,0 +1,76 @@
+﻿### Try to get the fruit before we've done anything
+GET http://localhost:5010/cache/read/fruit
+Accept: text/plain
+
+> {%
+    client.test("Request executed successfully", function() {
+        client.assert(response.status === 404, "Response status is not 404");
+    });
+%}
+
+### Add a fruit
+POST http://localhost:5010/cache/write/fruit
+Content-Type: text/plain
+
+apple
+
+> {%
+    client.test("Request executed successfully", function() {
+        client.assert(response.status === 200, "Response status is not 200");
+    });
+%}
+
+### Get that fruit; we should see "apple"
+GET http://localhost:5010/cache/read/fruit
+Accept: text/plain
+
+> {%
+    client.test("Request executed successfully", function() {
+        client.assert(response.body === "apple", "Response is not 'apple'");
+    });
+%}
+
+### Update the fruit
+PUT http://localhost:5010/cache/update/fruit
+Accept: text/plain
+Content-Type: text/plain
+
+banana
+
+> {%
+    client.test("Request executed successfully", function() {
+        client.assert(response.status === 200, "Response status is not 200");
+    });
+%}
+
+### Get that fruit; we should see "banana" this time
+GET http://localhost:5010/cache/read/fruit
+Accept: text/plain
+
+> {%
+    client.test("Request executed successfully", function() {
+        client.assert(response.body === "banana", "Response is not 'banana'");
+    });
+%}
+
+### All done, delete it
+DELETE http://localhost:5010/cache/delete/fruit
+Accept: text/plain
+
+> {%
+    client.test("Request executed successfully", function() {
+        client.assert(response.status === 200, "Response status is not 200");
+    });
+%}
+
+### Try to get the fruit again. It should be a 404 now
+GET http://localhost:5010/cache/read/fruit
+Accept: text/plain
+
+> {%
+    client.test("Request executed successfully", function() {
+        client.assert(response.status === 404, "Response status is not 404");
+    });
+%}
+
+###

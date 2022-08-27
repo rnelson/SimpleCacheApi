@@ -1,0 +1,8 @@
+﻿version: "3.9"
+services:
+  web:
+    image: "simplecacheapi:1.0.0"
+    ports:
+      - "5010:80"
+  redis:
+    image: "redis:alpine"

@@ -102,6 +102,6 @@ public class CacheController : ControllerBase
         _logger.LogDebug($"Deleting {key}");
         var result = await db.KeyDeleteAsync(key);
         
-        return Ok(result );
+        return Ok(result);
     }
 }
